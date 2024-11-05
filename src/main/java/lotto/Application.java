@@ -22,8 +22,6 @@ public class Application {
         LottoController lottoController = new LottoController(inputView, outputView, converter, splitter);
         try {
             lottoController.process();
-        } catch (RuntimeException exception) {
-            outputView.showException(exception);
         } finally {
             Console.close();
         }

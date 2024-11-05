@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import lotto.domain.lotto.Lottery;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
@@ -34,7 +35,7 @@ public class LottoController {
         List<Lotto> lottos = generateLottos(quantity);
 
         Lotto winningLotto = makeWinningLotto();
-        LottoNumber bonusNumber = makeBonusNumber();
+        LottoNumber bonusNumber = makeBonusNumber(winningLotto);
 
         Lottery lottery = new Lottery(winningLotto, bonusNumber, lottos);
         showLotteryReport(lottery);
@@ -48,8 +49,16 @@ public class LottoController {
     }
 
     private Price makePrice() {
-        outputView.showCommentForPrice();
-        return new Price(converter.convertToBigDecimal(inputView.readLine()));
+        while (true) {
+            try {
+                outputView.showCommentForPrice();
+                return new Price(converter.convertToBigDecimal(inputView.readLine()));
+            } catch (NoSuchElementException e) {
+                throw e;
+            } catch (RuntimeException e) {
+                outputView.showException(e);
+            }
+        }
     }
 
     private void showQuantity(final Quantity quantity) {
@@ -67,15 +76,31 @@ public class LottoController {
     }
 
     private Lotto makeWinningLotto() {
-        outputView.showCommentForWinningLotto();
-        List<String> numbers = splitter.split(inputView.readLine());
-        return new Lotto(converter.convertToInteger(numbers));
+        while (true) {
+            try {
+                outputView.showCommentForWinningLotto();
+                List<String> numbers = splitter.split(inputView.readLine());
+                return new Lotto(converter.convertToInteger(numbers));
+            } catch (NoSuchElementException e) {
+                throw e;
+            } catch (RuntimeException e) {
+                outputView.showException(e);
+            }
+        }
     }
 
-    private LottoNumber makeBonusNumber() {
-        outputView.showCommentForBonusNumber();
-        String inputBonusNumber = inputView.readLine();
-        return LottoNumber.valueOf(converter.convertToInteger(inputBonusNumber));
+    private LottoNumber makeBonusNumber(final Lotto lotto) {
+        while (true) {
+            try {
+                outputView.showCommentForBonusNumber();
+                String inputBonusNumber = inputView.readLine();
+                return LottoNumber.makeBonusNumber(converter.convertToInteger(inputBonusNumber), lotto);
+            } catch (NoSuchElementException e) {
+                throw e;
+            } catch (RuntimeException e) {
+                outputView.showException(e);
+            }
+        }
     }
 
     private void showLotteryReport(final Lottery lottery) {

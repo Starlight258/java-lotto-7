@@ -50,6 +50,11 @@ public class Lotto {
         return numbers.contains(lottoNumber);
     }
 
+    public boolean contains(int number) {
+        return numbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.getNumber() == number);
+    }
+
     private void validateUnique(final List<Integer> numbers) {
         if (countUniqueFrom(numbers) != LOTTO_SIZE) {
             throw new InvalidLottoException("로또는 중복되지 않은 6개의 숫자여야 합니다.");

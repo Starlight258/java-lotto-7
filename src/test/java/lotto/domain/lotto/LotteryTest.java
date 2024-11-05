@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import static lotto.support.utils.CustomExceptionAssertions.assertCustomIllegalArgumentException;
 import static lotto.support.utils.CustomExceptionAssertions.assertCustomIllegalStateException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -10,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import lotto.exception.state.InvalidStateException;
-import lotto.exception.argument.lotto.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -34,20 +32,6 @@ public class LotteryTest {
             assertThatCode(() -> {
                 new Lottery(winningLotto, bonusNumber, lottos);
             }).doesNotThrowAnyException();
-        }
-
-        @Test
-        @DisplayName("보너스 번호가 발행한 로또에 포함되면 예외가 발생한다.")
-        void 실패_생성_포함() {
-            // Given
-            Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-            LottoNumber bonusNumber = LottoNumber.valueOf(1);
-            List<Lotto> lottos = List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
-
-            // When & Then
-            assertCustomIllegalArgumentException(() -> new Lottery(winningLotto, bonusNumber, lottos))
-                    .isExactlyInstanceOf(InvalidLottoNumberException.class)
-                    .hasMessageContaining("보너스 번호가 로또에 포함되어서는 안됩니다.");
         }
     }
 

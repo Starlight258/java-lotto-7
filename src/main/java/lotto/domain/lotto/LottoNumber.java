@@ -24,13 +24,25 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(final int number) {
-        validateNumber(number);
+        validateRange(number);
         return CACHE.get(number - 1);
     }
 
-    private static void validateNumber(final int number) {
+    public static LottoNumber makeBonusNumber(final int number, final Lotto lotto) {
+        validateRange(number);
+        validateContains(number, lotto);
+        return CACHE.get(number - 1);
+    }
+
+    private static void validateRange(final int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new InvalidLottoNumberException("로또 번호는 1 이상 45 이하여야 합니다.");
+        }
+    }
+
+    private static void validateContains(final int number, final Lotto lotto) {
+        if (lotto.contains(number)) {
+            throw new InvalidLottoNumberException("보너스 번호가 로또에 포함되어서는 안됩니다.");
         }
     }
 

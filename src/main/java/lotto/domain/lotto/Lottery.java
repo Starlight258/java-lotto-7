@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import lotto.exception.state.InvalidStateException;
-import lotto.exception.argument.lotto.InvalidLottoNumberException;
 
 public class Lottery {
 
@@ -22,8 +21,6 @@ public class Lottery {
     private final Map<LottoRank, BigDecimal> results;
 
     public Lottery(final Lotto winningLotto, final LottoNumber bonusNumber, final List<Lotto> lottos) {
-        validateBonusNumber(winningLotto, bonusNumber);
-
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
         this.lottos = lottos;
@@ -39,12 +36,6 @@ public class Lottery {
         return profit.divide(purchaseAmount)
                 .multiply(BigDecimal.valueOf(100))
                 .setScale(SCALE, BigDecimal.ROUND_HALF_UP);
-    }
-
-    private void validateBonusNumber(final Lotto lotto, final LottoNumber bonusNumber) {
-        if (lotto.contains(bonusNumber)) {
-            throw new InvalidLottoNumberException("보너스 번호가 로또에 포함되어서는 안됩니다.");
-        }
     }
 
     private Map<LottoRank, BigDecimal> calculateWinningResults() {
