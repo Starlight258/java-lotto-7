@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import lotto.exception.state.InvalidStateException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -50,8 +51,9 @@ public class LotteryTest {
             Lottery lottery = new Lottery(winningLotto, bonusNumber, lottos);
 
             // When
-            BigDecimal firstCount = lottery.get(LottoRank.FIRST);
-            BigDecimal secondCount = lottery.get(LottoRank.SECOND);
+            Map<LottoRank, BigDecimal> results = lottery.getResults();
+            BigDecimal firstCount = results.get(LottoRank.FIRST);
+            BigDecimal secondCount = results.get(LottoRank.SECOND);
 
             // Then
             assertAll(

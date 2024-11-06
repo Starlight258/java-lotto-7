@@ -6,6 +6,9 @@ import lotto.support.validator.InputValidator;
 
 public class Splitter {
 
+    private static final String INPUT_TEXT = "입력 문자열";
+    private static final int CONTAINS_EMPTY = -1;
+
     private final String delimiter;
 
     public Splitter(final String delimiter) {
@@ -13,7 +16,7 @@ public class Splitter {
     }
 
     public List<String> split(final String text) {
-        InputValidator.validateNotNullOrBlank(text, "입력 문자열");
-        return Arrays.asList(text.split(delimiter, -1));
+        InputValidator.validateNotNullOrBlank(text, INPUT_TEXT);
+        return Arrays.asList(text.split(delimiter, CONTAINS_EMPTY));
     }
 }

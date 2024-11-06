@@ -2,6 +2,7 @@ package lotto.domain.price;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+
 import lotto.domain.quantity.Quantity;
 import lotto.exception.argument.price.InvalidPriceException;
 

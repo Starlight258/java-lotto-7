@@ -2,14 +2,15 @@ package lotto.domain.lotto;
 
 import static lotto.domain.lotto.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.lotto.LottoNumber.MIN_LOTTO_NUMBER;
+import static lotto.exception.constants.ExceptionMessage.INVALID_LOTTO_DUPLICATED;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import lotto.domain.quantity.Quantity;
-import lotto.dto.LottoNumberDto;
 import lotto.exception.argument.lotto.InvalidLottoException;
 
 public class Lotto {
@@ -25,7 +26,8 @@ public class Lotto {
 
     public static List<Lotto> createMultipleLottos(Quantity quantity) {
         List<Lotto> lottos = new ArrayList<>();
-        for (BigDecimal count = BigDecimal.ZERO; count.compareTo(quantity.getQuantity()) < 0; count = count.add(BigDecimal.ONE)) {
+        for (BigDecimal count = BigDecimal.ZERO; count.compareTo(quantity.getQuantity()) < 0;
+             count = count.add(BigDecimal.ONE)) {
             lottos.add(new Lotto(generateRandomLottoNumbers()));
         }
         return lottos;
@@ -57,7 +59,7 @@ public class Lotto {
 
     private void validateUnique(final List<Integer> numbers) {
         if (countUniqueFrom(numbers) != LOTTO_SIZE) {
-            throw new InvalidLottoException("로또는 중복되지 않은 6개의 숫자여야 합니다.");
+            throw new InvalidLottoException(INVALID_LOTTO_DUPLICATED.getMessage());
         }
     }
 
@@ -72,8 +74,8 @@ public class Lotto {
                 .toList();
     }
 
-    public LottoNumberDto getNumbers() {
-        return LottoNumberDto.of(numbers);
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override

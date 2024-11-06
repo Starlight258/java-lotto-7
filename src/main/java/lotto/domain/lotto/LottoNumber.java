@@ -1,5 +1,8 @@
 package lotto.domain.lotto;
 
+import static lotto.exception.constants.ExceptionMessage.INVALID_BONUS_NUMBER;
+import static lotto.exception.constants.ExceptionMessage.INVALID_LOTTO_RANGE;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -36,13 +39,13 @@ public class LottoNumber {
 
     private static void validateRange(final int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new InvalidLottoNumberException("로또 번호는 1 이상 45 이하여야 합니다.");
+            throw new InvalidLottoNumberException(INVALID_LOTTO_RANGE.getMessage());
         }
     }
 
     private static void validateContains(final int number, final Lotto lotto) {
         if (lotto.contains(number)) {
-            throw new InvalidLottoNumberException("보너스 번호가 로또에 포함되어서는 안됩니다.");
+            throw new InvalidLottoNumberException(INVALID_BONUS_NUMBER.getMessage());
         }
     }
 

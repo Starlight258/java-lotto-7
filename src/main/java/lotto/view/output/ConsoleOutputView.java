@@ -1,8 +1,8 @@
 package lotto.view.output;
 
 import java.math.BigDecimal;
+import java.util.List;
 import lotto.domain.lotto.LottoRank;
-import lotto.dto.LottoNumberDto;
 
 public class ConsoleOutputView implements OutputView {
 
@@ -33,7 +33,7 @@ public class ConsoleOutputView implements OutputView {
 
     @Override
     public void showWinningResult(final LottoRank lottoRank, final BigDecimal count) {
-        System.out.printf(lottoRank.getFormat() + System.lineSeparator(), lottoRank.getMatchCount(),
+        System.out.printf(lottoRank.format() + System.lineSeparator(), lottoRank.getMatchCount(),
                 lottoRank.getAward(), count);
     }
 
@@ -43,8 +43,8 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void showLotto(final LottoNumberDto numbers) {
-        System.out.println(numbers.numbers());
+    public void showLotto(final List<Integer> numbers) {
+        System.out.println(numbers);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import static lotto.domain.price.Price.LOTTO_UNIT_PRICE;
+import static lotto.exception.constants.ExceptionMessage.INVALID_LOTTO_STATUS;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -29,7 +30,7 @@ public class Lottery {
 
     public BigDecimal calculateProfitRate() {
         if (lottos.isEmpty()) {
-            throw new InvalidStateException("구매한 로또가 없습니다.");
+            throw new InvalidStateException(INVALID_LOTTO_STATUS.getMessage());
         }
         BigDecimal profit = calculateProfit();
         BigDecimal purchaseAmount = LOTTO_UNIT_PRICE.multiply(BigDecimal.valueOf(lottos.size()));
@@ -47,7 +48,7 @@ public class Lottery {
             getRank(lotto).ifPresent(lottoRank ->
                     results.put(lottoRank, results.get(lottoRank).add(BigDecimal.ONE)));
         }
-        return Collections.unmodifiableMap(results);
+        return results;
     }
 
     private BigDecimal calculateProfit() {
@@ -64,7 +65,7 @@ public class Lottery {
         return LottoRank.findRank(matchingCount, isBonus);
     }
 
-    public BigDecimal get(LottoRank lottoRank) {
-        return results.get(lottoRank);
+    public Map<LottoRank, BigDecimal> getResults() {
+        return Collections.unmodifiableMap(results);
     }
 }

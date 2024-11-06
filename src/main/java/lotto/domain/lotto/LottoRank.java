@@ -32,19 +32,19 @@ public enum LottoRank {
                 .findFirst();
     }
 
+    public String format() {
+        if (this == LottoRank.SECOND) {
+            return BONUS_FORMAT;
+        }
+        return DEFAULT_FORMAT;
+    }
+
     public BigDecimal getAward() {
         return award;
     }
 
     public int getMatchCount() {
         return matchCount;
-    }
-
-    public String getFormat() {
-        if (this == SECOND) {
-            return BONUS_FORMAT;
-        }
-        return DEFAULT_FORMAT;
     }
 }
 

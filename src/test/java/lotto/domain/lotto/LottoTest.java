@@ -33,7 +33,9 @@ class LottoTest {
             Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
             // Then
-            assertThat(lotto.getNumbers()).extracting("numbers").isEqualTo(List.of(1, 2, 3, 4, 5, 6));
+            assertThat(lotto).extracting("numbers")
+                    .isEqualTo(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                            LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         }
 
         @Test
@@ -45,7 +47,9 @@ class LottoTest {
             Lotto lotto = new Lotto(List.of(1, 11, 3, 4, 10, 6));
 
             // Then
-            assertThat(lotto.getNumbers()).extracting("numbers").isEqualTo(List.of(1, 3, 4, 6, 10, 11));
+            assertThat(lotto).extracting("numbers")
+                    .isEqualTo(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(3), LottoNumber.valueOf(4),
+                            LottoNumber.valueOf(6), LottoNumber.valueOf(10), LottoNumber.valueOf(11)));
         }
 
         @ParameterizedTest
@@ -94,7 +98,7 @@ class LottoTest {
             // Then
             assertAll(
                     () -> assertThat(lottos.size()).isEqualTo(2),
-                    () -> assertThat(lottos).allMatch(lotto -> lotto.getNumbers().numbers().size() == 6)
+                    () -> assertThat(lottos).allMatch(lotto -> lotto.getNumbers().size() == 6)
             );
         }
     }
