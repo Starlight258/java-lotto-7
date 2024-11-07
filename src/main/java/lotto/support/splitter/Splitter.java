@@ -2,7 +2,7 @@ package lotto.support.splitter;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.support.validator.InputValidator;
+import lotto.util.validator.InputValidator;
 
 public class Splitter {
 

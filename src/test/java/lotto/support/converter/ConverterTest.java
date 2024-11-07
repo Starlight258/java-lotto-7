@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.exception.argument.converter.InvalidConvertException;
+import lotto.util.converter.Converter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

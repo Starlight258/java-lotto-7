@@ -1,4 +1,4 @@
-package lotto.support.converter;
+package lotto.util.converter;
 
 import static lotto.exception.constants.ExceptionMessage.INVALID_BIGDECIMAL_FORMAT;
 import static lotto.exception.constants.ExceptionMessage.INVALID_NUMBER_FORMAT;
@@ -6,7 +6,7 @@ import static lotto.exception.constants.ExceptionMessage.INVALID_NUMBER_FORMAT;
 import java.math.BigDecimal;
 import java.util.List;
 import lotto.exception.argument.converter.InvalidConvertException;
-import lotto.support.validator.InputValidator;
+import lotto.util.validator.InputValidator;
 
 public class Converter {
 
@@ -14,14 +14,14 @@ public class Converter {
     private static final String NUMBER = "숫자";
     private static final String REAL_NUMBER = "실수";
 
-    public List<Integer> convertToInteger(List<String> numbers) {
+    public static List<Integer> convertToInteger(List<String> numbers) {
         InputValidator.validateNotNullOrEmpty(numbers, NUMBERS);
         return numbers.stream()
-                .map(this::convertToInteger)
+                .map(Converter::convertToInteger)
                 .toList();
     }
 
-    public int convertToInteger(final String input) {
+    public static int convertToInteger(final String input) {
         InputValidator.validateNotNullOrBlank(input, NUMBER);
         try {
             return Integer.parseInt(input.trim());
@@ -30,7 +30,7 @@ public class Converter {
         }
     }
 
-    public BigDecimal convertToBigDecimal(final String input) {
+    public static BigDecimal convertToBigDecimal(final String input) {
         InputValidator.validateNotNullOrBlank(input, REAL_NUMBER);
         try {
             return new BigDecimal(input.trim());

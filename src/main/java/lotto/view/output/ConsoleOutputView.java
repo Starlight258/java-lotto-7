@@ -48,7 +48,7 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void showException(final RuntimeException exception) {
-        System.out.println(exception.getMessage());
+    public void showException(final String message) {
+        System.out.println(message);
     }
 }

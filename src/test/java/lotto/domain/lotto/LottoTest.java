@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import lotto.domain.quantity.Quantity;
 import lotto.exception.argument.lotto.InvalidLottoException;
@@ -34,7 +35,7 @@ class LottoTest {
 
             // Then
             assertThat(lotto).extracting("numbers")
-                    .isEqualTo(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                    .isEqualTo(Set.of(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                             LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
         }
 
@@ -48,7 +49,7 @@ class LottoTest {
 
             // Then
             assertThat(lotto).extracting("numbers")
-                    .isEqualTo(List.of(LottoNumber.valueOf(1), LottoNumber.valueOf(3), LottoNumber.valueOf(4),
+                    .isEqualTo(Set.of(LottoNumber.valueOf(1), LottoNumber.valueOf(3), LottoNumber.valueOf(4),
                             LottoNumber.valueOf(6), LottoNumber.valueOf(10), LottoNumber.valueOf(11)));
         }
 

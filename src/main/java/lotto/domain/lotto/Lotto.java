@@ -9,7 +9,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 import lotto.domain.quantity.Quantity;
 import lotto.exception.argument.lotto.InvalidLottoException;
 
@@ -17,11 +19,12 @@ public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final TreeSet<LottoNumber> numbers;
 
     public Lotto(final List<Integer> numbers) {
-        validateUnique(numbers);
-        this.numbers = new ArrayList<>(toSortedLottoNumbers(numbers));
+        TreeSet<Integer> set = new TreeSet<>(numbers);
+        validateUnique(set);
+        this.numbers = toLottoNumbers(set);
     }
 
     public static List<Lotto> createMultipleLottos(Quantity quantity) {
@@ -57,41 +60,19 @@ public class Lotto {
                 .anyMatch(lottoNumber -> lottoNumber.getNumber() == number);
     }
 
-    private void validateUnique(final List<Integer> numbers) {
-        if (countUniqueFrom(numbers) != LOTTO_SIZE) {
-            throw new InvalidLottoException(INVALID_LOTTO_DUPLICATED.getMessage());
+    private void validateUnique(final Set<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new InvalidLottoException(INVALID_LOTTO_DUPLICATED.getMessage(LOTTO_SIZE));
         }
     }
 
-    private long countUniqueFrom(final List<Integer> numbers) {
-        return numbers.stream().distinct().count();
-    }
-
-    private List<LottoNumber> toSortedLottoNumbers(final List<Integer> numbers) {
+    private TreeSet<LottoNumber> toLottoNumbers(final Set<Integer> numbers) {
         return numbers.stream()
-                .sorted()
                 .map(LottoNumber::valueOf)
-                .toList();
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(numbers);
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Lotto other = (Lotto) o;
-        return Objects.equals(numbers, other.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
+    public Set<LottoNumber> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 }

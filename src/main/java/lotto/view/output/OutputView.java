@@ -21,5 +21,5 @@ public interface OutputView {
 
     void showLotto(List<Integer> numbers);
 
-    void showException(RuntimeException exception);
+    void showException(String message);
 }

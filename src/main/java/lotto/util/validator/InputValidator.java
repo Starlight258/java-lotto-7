@@ -1,4 +1,4 @@
-package lotto.support.validator;
+package lotto.util.validator;
 
 import java.util.List;
 import lotto.exception.argument.validator.InvalidInputException;

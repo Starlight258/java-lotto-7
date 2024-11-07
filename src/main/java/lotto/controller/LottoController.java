@@ -6,7 +6,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.price.Price;
 import lotto.domain.quantity.Quantity;
-import lotto.support.LottoFactory;
+import lotto.support.factory.LottoFactory;
 import lotto.view.LottoViewHandler;
 
 public class LottoController {

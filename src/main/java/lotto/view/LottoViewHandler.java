@@ -11,7 +11,7 @@ import lotto.domain.lotto.LottoRank;
 import lotto.domain.price.Price;
 import lotto.domain.quantity.Quantity;
 import lotto.exception.handler.ExceptionHandler;
-import lotto.support.LottoFactory;
+import lotto.support.factory.LottoFactory;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 

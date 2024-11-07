@@ -4,6 +4,7 @@ import static lotto.support.utils.CustomExceptionAssertions.assertCustomIllegalA
 
 import java.util.Collections;
 import lotto.exception.argument.validator.InvalidInputException;
+import lotto.util.validator.InputValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

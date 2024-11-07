@@ -9,8 +9,8 @@ public enum ExceptionMessage {
     INVALID_NUMBER_FORMAT("유효한 정수형식이어야 합니다."),
     INVALID_BIGDECIMAL_FORMAT("유효한 실수형식이어야 합니다."),
     INVALID_LOTTO_STATUS("구매한 로또가 없습니다."),
-    INVALID_LOTTO_DUPLICATED("로또는 중복되지 않은 6개의 숫자여야 합니다."),
-    INVALID_LOTTO_RANGE("로또 번호는 1 이상 45 이하여야 합니다."),
+    INVALID_LOTTO_DUPLICATED("로또는 중복되지 않은 %d개의 숫자여야 합니다."),
+    INVALID_LOTTO_RANGE("로또 번호는 %d 이상 %d 이하여야 합니다."),
     INVALID_BONUS_NUMBER("보너스 번호가 로또에 포함되어서는 안됩니다.");
 
     private final String message;

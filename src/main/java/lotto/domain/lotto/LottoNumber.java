@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 import lotto.exception.argument.lotto.InvalidLottoNumberException;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
@@ -39,7 +39,7 @@ public class LottoNumber {
 
     private static void validateRange(final int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new InvalidLottoNumberException(INVALID_LOTTO_RANGE.getMessage());
+            throw new InvalidLottoNumberException(INVALID_LOTTO_RANGE.getMessage(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
     }
 
@@ -47,6 +47,11 @@ public class LottoNumber {
         if (lotto.contains(number)) {
             throw new InvalidLottoNumberException(INVALID_BONUS_NUMBER.getMessage());
         }
+    }
+
+    @Override
+    public int compareTo(final LottoNumber other) {
+        return Integer.compare(this.number, other.number);
     }
 
     public int getNumber() {

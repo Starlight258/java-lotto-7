@@ -2,8 +2,7 @@ package lotto.config;
 
 import lotto.controller.LottoController;
 import lotto.exception.handler.ExceptionHandler;
-import lotto.support.LottoFactory;
-import lotto.support.converter.Converter;
+import lotto.support.factory.LottoFactory;
 import lotto.support.splitter.Splitter;
 import lotto.view.LottoViewHandler;
 import lotto.view.input.ConsoleInputView;
@@ -28,7 +27,7 @@ public class LottoConfig {
     }
 
     private LottoFactory createLottoFactory() {
-        return new LottoFactory(new Converter(), new Splitter(delimiter));
+        return new LottoFactory(new Splitter(delimiter));
     }
 
     private LottoViewHandler createLottoViewHandler(final InputView inputView, final OutputView outputView,

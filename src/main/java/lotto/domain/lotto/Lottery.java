@@ -14,7 +14,7 @@ import lotto.exception.state.InvalidStateException;
 
 public class Lottery {
 
-    private static final int SCALE = 1;
+    private static final int PROFIT_DECIMAL_SCALE = 1;
 
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
@@ -36,7 +36,7 @@ public class Lottery {
         BigDecimal purchaseAmount = LOTTO_UNIT_PRICE.multiply(BigDecimal.valueOf(lottos.size()));
         return profit.divide(purchaseAmount)
                 .multiply(BigDecimal.valueOf(100))
-                .setScale(SCALE, BigDecimal.ROUND_HALF_UP);
+                .setScale(PROFIT_DECIMAL_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 
     private Map<LottoRank, BigDecimal> calculateWinningResults() {
